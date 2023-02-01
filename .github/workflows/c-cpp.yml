@@ -44,8 +44,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ MYVER }}
-        release_name: Release ${{ MYREL }}
+        tag_name: ${{ env.MYVER }}
+        release_name: Release ${{ env.MYREL }}
         draft: false
         prerelease: false
         
@@ -58,6 +58,6 @@ jobs:
         # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`.
         # See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./hsflowd-${{ MYVER }}-${{ MYREL }}.${{ MYARCH }}.rpm
-        asset_name: hsflowd-${{ MYVER }}-${{ MYREL }}.${{ MYARCH }}.rpm
+        asset_path: ./hsflowd-${{ env.MYVER }}-${{ env.MYREL }}.${{ env.MYARCH }}.rpm
+        asset_name: hsflowd-${{ env.MYVER }}-${{ env.MYREL }}.${{ env.MYARCH }}.rpm
         asset_content_type: application/octet-stream
