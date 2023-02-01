@@ -30,13 +30,13 @@ jobs:
       run: make rpm FEATURES="PCAP TCP DROPMON DBUS SYSTEMD NFLOG HOST"
       
     - name: GET VERSION
-      run: MYVER=`./getVersion`
+      run:  echo "MYVER=`./getVersion`" >> $GITHUB_ENV 
       
     - name: GET ARCH
-      run: MYARCH=`uname -m`
+      run: echo "MYARCH=`uname -m`" >> $GITHUB_ENV 
       
     - name: Get RELEASE
-      run: MYREL=`./getRelease`
+      run: echo "MYREL=`./getRelease`" >> $GITHUB_ENV 
 
     - name: Create release
       id: create_release
