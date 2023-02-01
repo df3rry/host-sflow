@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Build and release RPM
 
 on:
   push:
@@ -29,6 +29,15 @@ jobs:
     - name: make
       run: make rpm FEATURES="PCAP TCP DROPMON DBUS SYSTEMD NFLOG HOST"
       
+    - name: GET VERSION
+      run: MYVER=`./getVersion`
+      
+    - name: GET ARCH
+      run: MYARCH=`uname -m`
+      
+    - name: Get RELEASE
+      run: MYREL=`./getRelease`
+
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
