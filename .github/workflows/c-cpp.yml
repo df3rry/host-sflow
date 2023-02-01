@@ -25,5 +25,30 @@ jobs:
           libxml2-dev \
           libssl-dev \
           libdbus-1-dev
+          
     - name: make
       run: make rpm FEATURES="PCAP TCP DROPMON DBUS SYSTEMD NFLOG HOST"
+      
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.VERSION }}
+        release_name: Release ${{ env.VERSION }}
+        draft: false
+        prerelease: false
+        
+    - name: Upload standard release asset
+      id: upload-release-asset-1
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`.
+        # See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./hsflowd-${{ env.VERSION }}.x86_64.rpm
+        asset_name: hsflowd.x86_64.rpm
+        asset_content_type: application/octet-stream
