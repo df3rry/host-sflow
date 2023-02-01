@@ -61,4 +61,5 @@ jobs:
         asset_path: ./hsflowd-${{ env.MYVER }}-${{ env.MYREL }}.${{ env.MYARCH }}.rpm
         asset_name: hsflowd-${{ env.MYVER }}-${{ env.MYREL }}.${{ env.MYARCH }}.rpm
         asset_content_type: application/octet-stream
+        overwrite: true
  
