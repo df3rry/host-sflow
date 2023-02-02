@@ -27,7 +27,7 @@ jobs:
           libdbus-1-dev
           
     - name: make
-      run: make rpm FEATURES="NFLOG PCAP TCP DOCKER KVM OVS DBUS SYSTEMD PSAMPLE DENT OS10"
+      run: make rpm FEATURES="NFLOG PCAP TCP DOCKER KVM OVS DBUS SYSTEMD PSAMPLE DENT"
       
     - name: GET VERSION
       run:  echo "MYVER=`./getVersion`" >> $GITHUB_ENV 
